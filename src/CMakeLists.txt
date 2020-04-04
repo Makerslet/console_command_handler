@@ -2,11 +2,23 @@ cmake_minimum_required(VERSION 3.2)
 set($TARGET console_command_handler)
 
 add_executable(${TARGET}
-    main.cpp)
+    main.cpp
+    base_command.h
+    base_publisher.h
+    base_subscriber.h
+    commands.h
+    commands_factory.h commands_factory.cpp
+    command_handler.h command_handler.cpp
+    console_printer.h console_printer.cpp
+    file_printer.h file_printer.cpp)
 
 set_target_properties(${TARGET} PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
+)
+
+target_include_directories(${TARGET}
+    PRIVATE ${Boost_INCLUDE_DIR}
 )
 
 # максимально строгие настройки компилятора
@@ -25,6 +37,10 @@ else ()
         -Wall -Wextra -pedantic -Werror
     )
 endif()
+
+target_link_libraries(${TARGET}
+    ${Boost_LIBRARIES}
+)
 
 # бинарник кладем в каталог bin
 install(TARGETS ${TARGET} RUNTIME DESTINATION bin)

@@ -10,6 +10,8 @@ else()
     project(${TARGET} VERSION 0.0.1)
 endif()
 
+find_package(Boost COMPONENTS program_options REQUIRED)
+
 # включаем тесты
 enable_testing()
 

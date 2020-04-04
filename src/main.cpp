@@ -1,5 +1,13 @@
+#include "commands_factory.h"
+#include "command_handler.h"
+#include "console_printer.h"
+#include "file_printer.h"
+
+#include <boost/program_options/options_description.hpp>
+#include <boost/program_options/variables_map.hpp>
+#include <boost/program_options/parsers.hpp>
+
 #include <iostream>
-#include <cassert>
 
 /**
  * @brief Entry point
@@ -10,8 +18,49 @@
  * @return Program exit status
  */
 
-int main (int, char **)
+int main (int argc, char** argv)
 {
+    boost::program_options::options_description description("Allowed options");
+    description.add_options()
+            ("help", "Type exit for exit")
+            ("length", boost::program_options::value<uint>(), "set bulk length");
+
+    boost::program_options::variables_map values_storage;
+    auto parsed_options = boost::program_options::parse_command_line(argc, argv, description);
+    boost::program_options::store(parsed_options, values_storage);
+
+    if (values_storage.count("help")) {
+        std::cout << description << std::endl;
+        return 0;
+    }
+
+    uint bulk_length = 0;
+    if(!values_storage.count("length"))
+    {
+        std::cout << "bulk length wasn't set" << std::endl;
+        return 1;
+    }
+    else
+        bulk_length = values_storage["length"].as<uint>();
+
+    std::string argument;
+    commands_factory cmd_factory;
+    command_type cmd_type;
+    command_handler cmd_handler(bulk_length);
+
+    auto console_out = std::make_shared<console_printer>();
+    auto file_out = std::make_shared<file_printer>();
+
+    cmd_handler.subscribe(console_out);
+    cmd_handler.subscribe(file_out);
+
+    do {
+        auto command = cmd_factory.create_command(argument);
+        cmd_type = command->type();
+        cmd_handler.add_command(std::move(command));
+
+    } while(cmd_type != command_type::finish);
+
     return 0;
 }
 
