@@ -6,7 +6,7 @@
 
 struct base_subscriber {
     virtual ~base_subscriber() = default;
-    virtual void update(const std::string&) = 0;
+    virtual void update(uint64_t, const std::string&) = 0;
 };
 
 #endif // BASE_SUBSCRIBER_H

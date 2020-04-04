@@ -7,14 +7,10 @@ class file_printer : public base_subscriber
 {
 public:
     file_printer();
-    void update(const std::string&) override;
+    void update(uint64_t,const std::string&) override;
 
 private:
-    void init_file_name();
-    void write(const std::string &out);
-
-private:
-    std::string _file_name;
+    void write(uint64_t timestamp, const std::string &out);
 };
 
 #endif // FILE_PRINTER_H

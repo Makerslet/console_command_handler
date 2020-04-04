@@ -7,7 +7,7 @@ class console_printer : public base_subscriber
 {
 public:
     console_printer();
-    void update(const std::string&) override;
+    void update(uint64_t, const std::string&) override;
 };
 
 #endif // CONSOLE_PRINTER_H

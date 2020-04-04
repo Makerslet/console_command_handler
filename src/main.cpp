@@ -55,6 +55,7 @@ int main (int argc, char** argv)
     cmd_handler.subscribe(file_out);
 
     do {
+        std::getline(std::cin, argument);
         auto command = cmd_factory.create_command(argument);
         cmd_type = command->type();
         cmd_handler.add_command(std::move(command));
