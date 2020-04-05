@@ -41,7 +41,15 @@ int main (int argc, char** argv)
         return 1;
     }
     else
-        bulk_length = values_storage["length"].as<uint>();
+    {
+        std::size_t tmp = values_storage["length"].as<uint>();
+        if(tmp > 0)
+            bulk_length = tmp;
+        else {
+            std::cout << "bulk length can't be 0" << std::endl;
+            return 1;
+        }
+    }
 
     std::string argument;
     commands_factory cmd_factory;

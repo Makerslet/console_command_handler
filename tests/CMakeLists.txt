@@ -1,7 +1,14 @@
 cmake_minimum_required(VERSION 3.2)
 
 set(TARGET_BIN console_command_handler_test)
-set(TARGET_SRC console_command_handler_test.cpp)
+set(TARGET_SRC
+    subscriber_mock.h
+    console_command_handler_test.cpp)
+
+set(TESTED_SRC
+    ../src/command_handler.h ../src/command_handler.cpp
+    ../src/commands_factory.h ../src/commands_factory.cpp)
+message("TESTED_SRC: ${TESTED_SRC}")
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
@@ -9,7 +16,7 @@ conan_basic_setup(TARGETS)
 find_package(Threads REQUIRED)
 find_package(GTest REQUIRED)
 
-add_executable(${TARGET_BIN} ${TARGET_SRC})
+add_executable(${TARGET_BIN} ${TARGET_SRC} ${TESTED_SRC})
 
 # включаем 17 стандарт
 set_target_properties(${TARGET_BIN} PROPERTIES

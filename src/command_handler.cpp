@@ -1,8 +1,6 @@
 #include "command_handler.h"
 #include "commands.h"
 
-#include <chrono>
-
 command_handler::command_handler(std::size_t bulk_length) :
     _bulk_length(bulk_length), _current_scope_level(0)
 {}
@@ -23,7 +21,8 @@ void command_handler::add_command(std::unique_ptr<base_command>&& command)
             break;
         }
         case command_type::text: {
-            handle_text_command((dynamic_cast<text_command*>(command.get()))->info());
+            handle_text_command((dynamic_cast<text_command*>(command.get()))->info(),
+                                command->timestamp());
             break;
         }
     }
@@ -92,9 +91,20 @@ void command_handler::handle_close_scope()
 }
 
 void command_handler::handle_finish()
-{}
+{
+    if(_current_scope_level == 0)
+    {
+        auto commands_iter = _commands.find(_current_scope_level);
+        if(commands_iter != _commands.end())
+        {
+            auto& description = commands_iter->second;
+            if(!description.second.empty())
+                notify(description.first, prepare_str(description.second));
+        }
+    }
+}
 
-void command_handler::handle_text_command(const std::string& str)
+void command_handler::handle_text_command(const std::string& str, uint64_t timestamp)
 {
     if(_commands.find(_current_scope_level) == _commands.end())
         _commands[_current_scope_level] = commands_description();
@@ -102,7 +112,7 @@ void command_handler::handle_text_command(const std::string& str)
     auto commands_iter = _commands.find(_current_scope_level);
     auto& description = commands_iter->second;
     if(description.second.empty())
-        description.first = time_stamp();
+        description.first = timestamp;
     description.second.push_back(str);
 
     if(_current_scope_level == 0)
@@ -121,15 +131,10 @@ std::string command_handler::prepare_str(const scope_commands& commands)
     for(const auto& command : commands)
         result += command + ", ";
 
-    result.erase(result.length() - 2, 1);
+    result.erase(result.length() - 2, 2);
     return result;
 }
 
-uint64_t command_handler::time_stamp()
-{
-    auto now = std::chrono::system_clock::now();
-    return  std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
-}
 
 void command_handler::subscribe(std::shared_ptr<base_subscriber> subscriber)
 {

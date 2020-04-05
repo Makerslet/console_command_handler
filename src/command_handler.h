@@ -23,10 +23,9 @@ private:
     void handle_open_scope();
     void handle_close_scope();
     void handle_finish();
-    void handle_text_command(const std::string& str);
+    void handle_text_command(const std::string& str, uint64_t);
 
     std::string prepare_str(const scope_commands&);
-    uint64_t time_stamp();
 
 private:
     std::size_t _bulk_length;
