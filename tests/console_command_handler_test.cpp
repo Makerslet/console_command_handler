@@ -50,7 +50,7 @@ TEST(COMMAND_HANDLER, BASE_CHECK)
 
     std::string command_text("hello_world");
     uint64_t timestamp = 123456;
-    cmd_handler.add_command(std::make_unique<text_command>(command_text, timestamp));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp, command_text));
 
     std::string expected = "bulk: " + command_text;
     ASSERT_EQ(expected, subscriber->output());
@@ -66,7 +66,7 @@ TEST(COMMAND_HANDLER, DATA_ENDED_IN_BASE_SCOPE)
 
     std::string command_text("hello_world");
     uint64_t timestamp = 123456;
-    cmd_handler.add_command(std::make_unique<text_command>(command_text, timestamp));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp, command_text));
     cmd_handler.add_command(std::make_unique<finish_command>(11));
 
     std::string expected = "bulk: " + command_text;
@@ -82,7 +82,7 @@ TEST(COMMAND_HANDLER, FORCED_CLOSURE_BASE_SCOPE)
 
     std::string command_text("hello_world");
     uint64_t timestamp = 123456;
-    cmd_handler.add_command(std::make_unique<text_command>(command_text, timestamp));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp, command_text));
     cmd_handler.add_command(std::make_unique<open_scope_command>(11));
 
     std::string expected = "bulk: " + command_text;
@@ -99,7 +99,7 @@ TEST(COMMAND_HANDLER, ONE_NESTED_SCOPE)
     std::string command_text("hello_world");
     uint64_t timestamp = 123456;
     cmd_handler.add_command(std::make_unique<open_scope_command>(11));
-    cmd_handler.add_command(std::make_unique<text_command>(command_text, timestamp));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp, command_text));
     cmd_handler.add_command(std::make_unique<close_scope_command>(12));
 
     std::string expected = "bulk: " + command_text;
@@ -122,13 +122,13 @@ TEST(COMMAND_HANDLER, MULTIPLE_NESTED_SCOPES)
     uint64_t timestamp3 = 333333;
 
     cmd_handler.add_command(std::make_unique<open_scope_command>(1));
-    cmd_handler.add_command(std::make_unique<text_command>(command1_text, timestamp1));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp1, command1_text));
 
     cmd_handler.add_command(std::make_unique<open_scope_command>(2));
-    cmd_handler.add_command(std::make_unique<text_command>(command2_text, timestamp2));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp2, command2_text));
     cmd_handler.add_command(std::make_unique<close_scope_command>(3));
 
-    cmd_handler.add_command(std::make_unique<text_command>(command3_text, timestamp3));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp3, command3_text));
     cmd_handler.add_command(std::make_unique<close_scope_command>(4));
 
     std::string expected = "bulk: " +
@@ -148,7 +148,7 @@ TEST(COMMAND_HANDLER, FORCED_CLOSURE_NESTED_SCOPE)
     std::string command_text("hello_world");
     uint64_t timestamp = 123456;
     cmd_handler.add_command(std::make_unique<open_scope_command>(11));
-    cmd_handler.add_command(std::make_unique<text_command>(command_text, timestamp));
+    cmd_handler.add_command(std::make_unique<text_command>(timestamp, command_text));
     cmd_handler.add_command(std::make_unique<finish_command>(12));
 
     std::string expected = "";

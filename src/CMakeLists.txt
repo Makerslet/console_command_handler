@@ -3,9 +3,9 @@ set($TARGET console_command_handler)
 
 add_executable(${TARGET}
     main.cpp
-    base_command.h
-    base_publisher.h
-    base_subscriber.h
+    base/base_command.h
+    base/base_publisher.h
+    base/base_subscriber.h
     commands.h
     commands_factory.h commands_factory.cpp
     command_handler.h command_handler.cpp

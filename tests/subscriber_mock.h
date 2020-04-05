@@ -1,7 +1,7 @@
 #ifndef SUBSCRIBER_MOCK_H
 #define SUBSCRIBER_MOCK_H
 
-#include "base_subscriber.h"
+#include "base/base_subscriber.h"
 
 struct subscriber_mock : base_subscriber {
     subscriber_mock() : _timestamp(0) {}

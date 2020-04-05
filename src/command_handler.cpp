@@ -21,8 +21,8 @@ void command_handler::add_command(std::unique_ptr<base_command>&& command)
             break;
         }
         case command_type::text: {
-            handle_text_command((dynamic_cast<text_command*>(command.get()))->info(),
-                                command->timestamp());
+            handle_text_command(command->timestamp(),
+                                (dynamic_cast<text_command*>(command.get()))->info());
             break;
         }
     }
@@ -104,7 +104,7 @@ void command_handler::handle_finish()
     }
 }
 
-void command_handler::handle_text_command(const std::string& str, uint64_t timestamp)
+void command_handler::handle_text_command(uint64_t timestamp, const std::string& str)
 {
     if(_commands.find(_current_scope_level) == _commands.end())
         _commands[_current_scope_level] = commands_description();
