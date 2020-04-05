@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structbase__command.html" title="base_command" alt="" coords="5,81,131,108"/>
-<area shape="rect" id="node2" href="$structclose__scope__command.html" title="close_scope_command" alt="" coords="179,5,352,32"/>
-<area shape="rect" id="node3" href="$structfinish__command.html" title="finish_command" alt="" coords="201,56,330,83"/>
-<area shape="rect" id="node4" href="$structopen__scope__command.html" title="open_scope_command" alt="" coords="180,107,351,133"/>
-<area shape="rect" id="node5" href="$structtext__command.html" title="text_command" alt="" coords="205,157,325,184"/>
+<area shape="rect" id="node1" href="$structbase__command.html" title="Базовый тип команд " alt="" coords="5,81,131,108"/>
+<area shape="rect" id="node2" href="$structclose__scope__command.html" title="Команда закрытия scope. " alt="" coords="179,5,352,32"/>
+<area shape="rect" id="node3" href="$structfinish__command.html" title="Команда завершения ввода " alt="" coords="201,56,330,83"/>
+<area shape="rect" id="node4" href="$structopen__scope__command.html" title="Команда открытия scope. " alt="" coords="180,107,351,133"/>
+<area shape="rect" id="node5" href="$structtext__command.html" title="Текстовая команда " alt="" coords="205,157,325,184"/>
 </map>

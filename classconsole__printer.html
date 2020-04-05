@@ -68,13 +68,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Класс производящий вывод полученной команды на стандартный вывод  
+ <a href="classconsole__printer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="console__printer_8h_source.html">console_printer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for console_printer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classconsole__printer__inherit__graph.png" border="0" usemap="#console__printer_inherit__map" alt="Inheritance graph"/></div>
 <map name="console__printer_inherit__map" id="console__printer_inherit__map">
-<area shape="rect" id="node2" href="structbase__subscriber.html" title="base_subscriber" alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node2" href="structbase__subscriber.html" title="Интерфейс подписчика " alt="" coords="5,5,132,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -82,21 +85,26 @@ Collaboration diagram for console_printer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classconsole__printer__coll__graph.png" border="0" usemap="#console__printer_coll__map" alt="Collaboration graph"/></div>
 <map name="console__printer_coll__map" id="console__printer_coll__map">
-<area shape="rect" id="node2" href="structbase__subscriber.html" title="base_subscriber" alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node2" href="structbase__subscriber.html" title="Интерфейс подписчика " alt="" coords="5,5,132,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8c70e427ff1f4337bf921872fbce93c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classconsole__printer.html#a8c70e427ff1f4337bf921872fbce93c0">console_printer</a> ()</td></tr>
+<tr class="memdesc:a8c70e427ff1f4337bf921872fbce93c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор  <a href="#a8c70e427ff1f4337bf921872fbce93c0">More...</a><br /></td></tr>
 <tr class="separator:a8c70e427ff1f4337bf921872fbce93c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61e50fd6e16e2db46c2185811ec289b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classconsole__printer.html#a61e50fd6e16e2db46c2185811ec289b5">update</a> (uint64_t, const std::string &amp;) override</td></tr>
-<tr class="separator:a61e50fd6e16e2db46c2185811ec289b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cd2d4b48425f434df2fd92eb3ae05ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classconsole__printer.html#a3cd2d4b48425f434df2fd92eb3ae05ed">update</a> (uint64_t, const std::string &amp;str) override</td></tr>
+<tr class="memdesc:a3cd2d4b48425f434df2fd92eb3ae05ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработка команда от publisher'а  <a href="#a3cd2d4b48425f434df2fd92eb3ae05ed">More...</a><br /></td></tr>
+<tr class="separator:a3cd2d4b48425f434df2fd92eb3ae05ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structbase__subscriber"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structbase__subscriber')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structbase__subscriber.html">base_subscriber</a></td></tr>
 <tr class="memitem:ab24fe45fa1e2a8d4b158c84d5f65eb81 inherit pub_methods_structbase__subscriber"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbase__subscriber.html#ab24fe45fa1e2a8d4b158c84d5f65eb81">~base_subscriber</a> ()=default</td></tr>
+<tr class="memdesc:ab24fe45fa1e2a8d4b158c84d5f65eb81 inherit pub_methods_structbase__subscriber"><td class="mdescLeft">&#160;</td><td class="mdescRight">Деструктор подписчика  <a href="structbase__subscriber.html#ab24fe45fa1e2a8d4b158c84d5f65eb81">More...</a><br /></td></tr>
 <tr class="separator:ab24fe45fa1e2a8d4b158c84d5f65eb81 inherit pub_methods_structbase__subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Класс производящий вывод полученной команды на стандартный вывод </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8c70e427ff1f4337bf921872fbce93c0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c70e427ff1f4337bf921872fbce93c0">&#9670;&nbsp;</a></span>console_printer()</h2>
 
@@ -112,11 +120,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Конструктор </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a61e50fd6e16e2db46c2185811ec289b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61e50fd6e16e2db46c2185811ec289b5">&#9670;&nbsp;</a></span>update()</h2>
+<a id="a3cd2d4b48425f434df2fd92eb3ae05ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cd2d4b48425f434df2fd92eb3ae05ed">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +144,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>out</em>&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -149,7 +159,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="structbase__subscriber.html#aa94cb637181fd70a09e52eb85d9053bc">base_subscriber</a>.</p>
+<p>Обработка команда от publisher'а </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>- текст </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="structbase__subscriber.html#a7da10701a422cfd2f4ef95dd9c3abd42">base_subscriber</a>.</p>
 
 </div>
 </div>

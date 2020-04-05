@@ -1,4 +1,4 @@
 <map id="base_subscriber" name="base_subscriber">
-<area shape="rect" id="node2" href="$classconsole__printer.html" title="console_printer" alt="" coords="5,80,128,107"/>
-<area shape="rect" id="node3" href="$classfile__printer.html" title="file_printer" alt="" coords="153,80,245,107"/>
+<area shape="rect" id="node2" href="$classconsole__printer.html" title="Класс производящий вывод полученной команды на стандартный вывод " alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node3" href="$classfile__printer.html" title="Класс производящий вывод полученной команды в файл " alt="" coords="153,80,245,107"/>
 </map>

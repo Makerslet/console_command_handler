@@ -68,24 +68,31 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Интерфейс publisher'а  
+ <a href="structbase__publisher.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="base__publisher_8h_source.html">base_publisher.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for base_publisher:</div>
 <div class="dyncontent">
 <div class="center"><img src="structbase__publisher__inherit__graph.png" border="0" usemap="#base__publisher_inherit__map" alt="Inheritance graph"/></div>
 <map name="base__publisher_inherit__map" id="base__publisher_inherit__map">
-<area shape="rect" id="node2" href="classcommand__handler.html" title="command_handler" alt="" coords="5,80,148,107"/>
+<area shape="rect" id="node2" href="classcommand__handler.html" title="Класс обработки команд " alt="" coords="5,80,148,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4d603124eddc80f2223511601ee0f1bf"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbase__publisher.html#a4d603124eddc80f2223511601ee0f1bf">~base_publisher</a> ()=default</td></tr>
+<tr class="memdesc:a4d603124eddc80f2223511601ee0f1bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Деструктор publisher'а  <a href="#a4d603124eddc80f2223511601ee0f1bf">More...</a><br /></td></tr>
 <tr class="separator:a4d603124eddc80f2223511601ee0f1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a62abe301249c77aabc33851379c0bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbase__publisher.html#a3a62abe301249c77aabc33851379c0bb">subscribe</a> (std::shared_ptr&lt; <a class="el" href="structbase__subscriber.html">base_subscriber</a> &gt;)=0</td></tr>
-<tr class="separator:a3a62abe301249c77aabc33851379c0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f0c2cf657954f152badbd289804fca"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbase__publisher.html#a21f0c2cf657954f152badbd289804fca">subscribe</a> (std::shared_ptr&lt; <a class="el" href="structbase__subscriber.html">base_subscriber</a> &gt; subscriber)=0</td></tr>
+<tr class="memdesc:a21f0c2cf657954f152badbd289804fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Метод подписки на уведомления  <a href="#a21f0c2cf657954f152badbd289804fca">More...</a><br /></td></tr>
+<tr class="separator:a21f0c2cf657954f152badbd289804fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Интерфейс publisher'а </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4d603124eddc80f2223511601ee0f1bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d603124eddc80f2223511601ee0f1bf">&#9670;&nbsp;</a></span>~base_publisher()</h2>
 
@@ -109,11 +116,13 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Деструктор publisher'а </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3a62abe301249c77aabc33851379c0bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a62abe301249c77aabc33851379c0bb">&#9670;&nbsp;</a></span>subscribe()</h2>
+<a id="a21f0c2cf657954f152badbd289804fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21f0c2cf657954f152badbd289804fca">&#9670;&nbsp;</a></span>subscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +134,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void base_publisher::subscribe </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structbase__subscriber.html">base_subscriber</a> &gt;&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>subscriber</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -136,12 +145,20 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classcommand__handler.html#afb98e4161998a3f1d0e3998f30bfacc5">command_handler</a>.</p>
+<p>Метод подписки на уведомления </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subscriber</td><td>- подписчик </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classcommand__handler.html#a919e54449deb25f644ecfb3ba963a522">command_handler</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/<a class="el" href="base__publisher_8h_source.html">base_publisher.h</a></li>
+<li>src/base/<a class="el" href="base__publisher_8h_source.html">base_publisher.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
