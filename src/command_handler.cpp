@@ -2,8 +2,12 @@
 #include "commands.h"
 
 command_handler::command_handler(std::size_t bulk_length) :
-    _bulk_length(bulk_length), _current_scope_level(0)
-{}
+    _bulk_length(bulk_length),
+    _current_scope_level(0)
+{
+    _commands.emplace_back(commands_description()); // 0 scope
+    _commands.emplace_back(commands_description()); // nested scopes
+}
 
 void command_handler::add_command(std::unique_ptr<base_command>&& command)
 {
@@ -31,29 +35,28 @@ void command_handler::add_command(std::unique_ptr<base_command>&& command)
 
 void command_handler::handle_open_scope()
 {
-    if(_current_scope_level == 0)
+    if(_current_scope_level > 0)
     {
-        auto commands_iter = _commands.find(_current_scope_level);
-        if(commands_iter != _commands.end())
-        {
-            auto& description = commands_iter->second;
-            if(!description.second.empty())
-            {
-                notify(description.first, prepare_str(description.second));
-                description.second.clear();
-            }
-        }
-        else
-            _commands[_current_scope_level] = commands_description();
+        ++_current_scope_level;
+        return;
     }
 
-    ++_current_scope_level;
-    if(_commands.find(_current_scope_level) == _commands.end())
-        _commands[_current_scope_level] = commands_description();
-    auto commands_iter = _commands.find(_current_scope_level);
-    auto& description = commands_iter->second;
-    description.first = 0;
-    description.second.clear();
+    // отправить на выполнение команды нулевого scope
+    // если он не пустой
+    commands_description& commands_scope = _commands[_current_scope_level];
+
+    if(!commands_scope.second.empty())
+    {
+        notify(commands_scope.first, prepare_str(commands_scope.second));
+        commands_scope.second.clear();
+    }
+
+    //проинициализировать вложенный scope
+    _current_scope_level = 1;
+
+    commands_scope = _commands[_current_scope_level];
+    commands_scope.first = 0;
+    commands_scope.second.clear();
 }
 
 void command_handler::handle_close_scope()
@@ -65,26 +68,13 @@ void command_handler::handle_close_scope()
     }
     else if(_current_scope_level == 1)
     {
-        scope_commands commands;
-        uint64_t timestamp = 0;
-        for(auto& scope : _commands)
+        commands_description& commands = _commands[_current_scope_level];
+        if(!commands.second.empty())
         {
-            if(scope.first == 0)
-                continue;
-
-            auto& description = scope.second;
-            if(timestamp == 0)
-                timestamp = description.first;
-
-            for(const auto& command : description.second)
-                commands.push_back(command);
-
-            description.first = 0;
-            description.second.clear();
+            notify(commands.first, prepare_str(commands.second));
+            commands.first = 0;
+            commands.second.clear();
         }
-
-        if(!commands.empty())
-            notify(timestamp, prepare_str(commands));
     }
 
     --_current_scope_level;
@@ -94,33 +84,27 @@ void command_handler::handle_finish()
 {
     if(_current_scope_level == 0)
     {
-        auto commands_iter = _commands.find(_current_scope_level);
-        if(commands_iter != _commands.end())
-        {
-            auto& description = commands_iter->second;
-            if(!description.second.empty())
-                notify(description.first, prepare_str(description.second));
-        }
+        commands_description& commands = _commands[_current_scope_level];
+        if(!commands.second.empty())
+            notify(commands.first, prepare_str(commands.second));
     }
 }
 
 void command_handler::handle_text_command(uint64_t timestamp, const std::string& str)
 {
-    if(_commands.find(_current_scope_level) == _commands.end())
-        _commands[_current_scope_level] = commands_description();
+    size_t index = _current_scope_level > 0 ? 1 : 0;
+    commands_description& commands = _commands[index];
 
-    auto commands_iter = _commands.find(_current_scope_level);
-    auto& description = commands_iter->second;
-    if(description.second.empty())
-        description.first = timestamp;
-    description.second.push_back(str);
+    if(commands.second.empty())
+        commands.first = timestamp;
+    commands.second.push_back(str);
 
     if(_current_scope_level == 0)
     {
-        if(description.second.size() == _bulk_length)
+        if(commands.second.size() == _bulk_length)
         {
-            notify(description.first, prepare_str(description.second));
-            description.second.clear();
+            notify(commands.first, prepare_str(commands.second));
+            commands.second.clear();
         }
     }
 }

@@ -26,13 +26,7 @@ if (MSVC)
     target_compile_options(${TARGET} PRIVATE
         /W4
     )
-    target_compile_options(${TARGET} PRIVATE
-        /W4
-    )
 else ()
-    target_compile_options(${TARGET} PRIVATE
-        -Wall -Wextra -pedantic -Werror
-    )
     target_compile_options(${TARGET} PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
@@ -52,6 +46,7 @@ set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 set(CPACK_PACKAGE_CONTACT oshuev.valery@yandex.ru)
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libboost-program-options") 
 
 # подключем генератор пакетов
 include(CPack)

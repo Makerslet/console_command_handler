@@ -75,7 +75,7 @@ private:
     std::size_t _current_scope_level;
 
     std::vector<std::weak_ptr<base_subscriber>> _subscribers;
-    std::map<std::size_t, commands_description> _commands;
+    std::vector<commands_description> _commands;
 };
 
 #endif // COMMAND_HANDLER_H
