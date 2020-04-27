@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['subscribe',['subscribe',['../structbase__publisher.html#a21f0c2cf657954f152badbd289804fca',1,'base_publisher::subscribe()'],['../classcommand__handler.html#a919e54449deb25f644ecfb3ba963a522',1,'command_handler::subscribe()']]]
+  ['parse',['parse',['../classargs__parser.html#ac93d9017d6669b00e5eff482c4a3ad84',1,'args_parser']]]
 ];

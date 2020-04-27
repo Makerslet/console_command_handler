@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['open_5fscope_5fcommand',['open_scope_command',['../structopen__scope__command.html',1,'']]]
+  ['file_5fprinter',['file_printer',['../classfile__printer.html',1,'']]],
+  ['finish_5fcommand',['finish_command',['../structfinish__command.html',1,'']]]
 ];
