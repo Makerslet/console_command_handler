@@ -2,6 +2,7 @@
 #include "command_handler.h"
 #include "console_printer.h"
 #include "file_printer.h"
+#include "args_parser.h"
 
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -18,43 +19,20 @@
  * @return Program exit status
  */
 
+namespace bpo = boost::program_options;
+
 int main (int argc, char** argv)
 {
-    boost::program_options::options_description description("Allowed options");
-    description.add_options()
-            ("help", "Type exit for exit")
-            ("length", boost::program_options::value<uint>(), "set bulk length");
-
-    boost::program_options::variables_map values_storage;
-    auto parsed_options = boost::program_options::parse_command_line(argc, argv, description);
-    boost::program_options::store(parsed_options, values_storage);
-
-    if (values_storage.count("help")) {
-        std::cout << description << std::endl;
+    args_parser parser;
+    std::optional<size_t> result = parser.parse(argc, argv);
+    if(!result.has_value())
         return 0;
-    }
 
-    uint bulk_length = 0;
-    if(!values_storage.count("length"))
-    {
-        std::cout << "bulk length wasn't set" << std::endl;
-        return 1;
-    }
-    else
-    {
-        std::size_t tmp = values_storage["length"].as<uint>();
-        if(tmp > 0)
-            bulk_length = tmp;
-        else {
-            std::cout << "bulk length can't be 0" << std::endl;
-            return 1;
-        }
-    }
 
     std::string argument;
     commands_factory cmd_factory;
     command_type cmd_type;
-    command_handler cmd_handler(bulk_length);
+    command_handler cmd_handler(result.value());
 
     auto console_out = std::make_shared<console_printer>();
     auto file_out = std::make_shared<file_printer>();

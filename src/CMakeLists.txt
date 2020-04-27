@@ -10,7 +10,8 @@ add_executable(${TARGET}
     commands_factory.h commands_factory.cpp
     command_handler.h command_handler.cpp
     console_printer.h console_printer.cpp
-    file_printer.h file_printer.cpp)
+    file_printer.h file_printer.cpp
+    args_parser.h args_parser.cpp)
 
 set_target_properties(${TARGET} PROPERTIES
     CXX_STANDARD 17
