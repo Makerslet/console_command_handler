@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['text_5fcommand',['text_command',['../structtext__command.html',1,'']]]
+  ['signals_5fhandler',['signals_handler',['../classsignals__handler.html',1,'']]]
 ];

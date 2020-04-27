@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['open_5fscope',['open_scope',['../base__command_8h.html#a71e4cb55459005154ad8360914a8e1f4aaa60dc19c4e3e48546175263740e4323',1,'base_command.h']]],
-  ['open_5fscope_5fcommand',['open_scope_command',['../structopen__scope__command.html',1,'open_scope_command'],['../structopen__scope__command.html#a7b70bddbea07370e66a8a11a41c7dda7',1,'open_scope_command::open_scope_command()']]]
+  ['info',['info',['../structtext__command.html#aa8c434b9bf6e6f3e5ac9e85c96cca054',1,'text_command']]]
 ];

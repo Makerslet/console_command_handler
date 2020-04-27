@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['base_5fcommand',['base_command',['../structbase__command.html',1,'base_command'],['../structbase__command.html#a349ff5e08e5079bafb33bf94a89b267a',1,'base_command::base_command()']]],
-  ['base_5fcommand_2eh',['base_command.h',['../base__command_8h.html',1,'']]],
-  ['base_5fpublisher',['base_publisher',['../structbase__publisher.html',1,'']]],
-  ['base_5fpublisher_2eh',['base_publisher.h',['../base__publisher_8h.html',1,'']]],
-  ['base_5fsubscriber',['base_subscriber',['../structbase__subscriber.html',1,'']]],
-  ['base_5fsubscriber_2eh',['base_subscriber.h',['../base__subscriber_8h.html',1,'']]]
+  ['add_5fcommand',['add_command',['../classcommand__handler.html#a494ceee4b9893dc196d88e9259dde9e0',1,'command_handler']]],
+  ['args_5fparser',['args_parser',['../classargs__parser.html',1,'args_parser'],['../classargs__parser.html#a5eef6ed02f9e8a6ec2ae5ef542182021',1,'args_parser::args_parser()']]],
+  ['args_5fparser_2ecpp',['args_parser.cpp',['../args__parser_8cpp.html',1,'']]],
+  ['args_5fparser_2eh',['args_parser.h',['../args__parser_8h.html',1,'']]]
 ];

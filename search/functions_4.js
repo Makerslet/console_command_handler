@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['info',['info',['../structtext__command.html#aa8c434b9bf6e6f3e5ac9e85c96cca054',1,'text_command']]]
+  ['handle_5fsigint',['handle_sigint',['../classsignals__handler.html#a761d4772bb6be28dabe1c27ef8bd4cb3',1,'signals_handler']]]
 ];
