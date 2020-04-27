@@ -14,8 +14,7 @@ args_parser::args_parser() :
 std::optional<size_t> args_parser::parse(int argc, char **argv)
 {
     std::optional<size_t> return_value;
-    try
-    {
+    try {
         auto parsed_options = boost::program_options::parse_command_line(argc, argv, _description);
         boost::program_options::store(parsed_options, _values_storage);
 

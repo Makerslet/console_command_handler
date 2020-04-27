@@ -11,8 +11,6 @@ std::unique_ptr<base_command> commands_factory::create_command(const std::string
         return std::make_unique<open_scope_command>(timestamp);
     else if(str == "}")
         return  std::make_unique<close_scope_command>(timestamp);
-    else if(str == "exit")
-        return  std::make_unique<finish_command>(timestamp);
     else
         return std::make_unique<text_command>(timestamp, str);
 }

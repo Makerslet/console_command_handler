@@ -54,17 +54,4 @@ private:
     std::string _info;
 };
 
-
-/**
- * @brief Команда завершения ввода
- */
-struct finish_command : base_command {
-    /**
-     * @brief Конструктор
-     * @param ts - временная метка
-     */
-    finish_command(uint64_t ts) :
-        base_command(command_type::finish, ts) {}
-};
-
 #endif // COMMANDS_H

@@ -9,7 +9,6 @@
 enum class command_type {
     open_scope,
     close_scope,
-    finish,
     text
 };
 

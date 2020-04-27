@@ -23,15 +23,6 @@ TEST(FACTORY, CLOSE_SCOPE_COMMAND)
     ASSERT_EQ(cmd->type(), command_type::close_scope);
 }
 
-TEST(FACTORY, FINISH_COMMAND)
-{
-    std::string str = "exit";
-    commands_factory factory;
-    auto cmd = factory.create_command(str);
-
-    ASSERT_EQ(cmd->type(), command_type::finish);
-}
-
 TEST(FACTORY, TEXT_COMMAND)
 {
     std::string str = "abrakadabra";
@@ -67,7 +58,7 @@ TEST(COMMAND_HANDLER, DATA_ENDED_IN_BASE_SCOPE)
     std::string command_text("hello_world");
     uint64_t timestamp = 123456;
     cmd_handler.add_command(std::make_unique<text_command>(timestamp, command_text));
-    cmd_handler.add_command(std::make_unique<finish_command>(11));
+    cmd_handler.stop_handling();
 
     std::string expected = "bulk: " + command_text;
     ASSERT_EQ(expected, subscriber->output());
@@ -149,7 +140,7 @@ TEST(COMMAND_HANDLER, FORCED_CLOSURE_NESTED_SCOPE)
     uint64_t timestamp = 123456;
     cmd_handler.add_command(std::make_unique<open_scope_command>(11));
     cmd_handler.add_command(std::make_unique<text_command>(timestamp, command_text));
-    cmd_handler.add_command(std::make_unique<finish_command>(12));
+    cmd_handler.stop_handling();
 
     std::string expected = "";
     ASSERT_EQ(expected, subscriber->output());

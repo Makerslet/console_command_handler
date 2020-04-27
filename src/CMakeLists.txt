@@ -11,7 +11,8 @@ add_executable(${TARGET}
     command_handler.h command_handler.cpp
     console_printer.h console_printer.cpp
     file_printer.h file_printer.cpp
-    args_parser.h args_parser.cpp)
+    args_parser.h args_parser.cpp
+    signals_handler.h signals_handler.cpp)
 
 set_target_properties(${TARGET} PROPERTIES
     CXX_STANDARD 17

@@ -1,6 +1,8 @@
 #include "command_handler.h"
 #include "commands.h"
 
+#include <sstream>
+
 command_handler::command_handler(std::size_t bulk_length) :
     _bulk_length(bulk_length),
     _current_scope_level(0)
@@ -18,10 +20,6 @@ void command_handler::add_command(std::unique_ptr<base_command>&& command)
         }
         case command_type::close_scope: {
             handle_close_scope();
-            break;
-        }
-        case command_type::finish : {
-            handle_finish();
             break;
         }
         case command_type::text: {
@@ -63,8 +61,10 @@ void command_handler::handle_close_scope()
 {
     if(_current_scope_level == 0)
     {
-        std::string error = "error close scope";
-        throw std::logic_error(error);
+        throw std::logic_error(
+                    "You can't use close scope operator out of scope. "
+                    "This command will be ignored."
+                    );
     }
     else if(_current_scope_level == 1)
     {
@@ -80,7 +80,7 @@ void command_handler::handle_close_scope()
     --_current_scope_level;
 }
 
-void command_handler::handle_finish()
+void command_handler::stop_handling()
 {
     if(_current_scope_level == 0)
     {
@@ -111,26 +111,31 @@ void command_handler::handle_text_command(uint64_t timestamp, const std::string&
 
 std::string command_handler::prepare_str(const scope_commands& commands)
 {
-    std::string result("bulk: ");
-    for(const auto& command : commands)
-        result += command + ", ";
+    std::stringstream ss;
+    ss << "bulk: ";
 
-    result.erase(result.length() - 2, 2);
-    return result;
-}
+    size_t cmds_size = commands.size();
+    for(size_t i = 0; i < cmds_size; ++i)
+    {
+        ss << commands[i];
+        if(i != cmds_size - 1)
+            ss << ", ";
+    }
 
-
-void command_handler::subscribe(std::shared_ptr<base_subscriber> subscriber)
-{
-    _subscribers.push_back(subscriber);
+    return ss.str();
 }
 
 void command_handler::notify(uint64_t timestamp,const std::string& string)
 {
-    for(auto subscriber : _subscribers)
+    for(auto s_it = _subscribers.begin(); s_it != _subscribers.end();)
     {
-        auto shared_subscriber = subscriber.lock();
+        auto shared_subscriber = s_it->lock();
         if(shared_subscriber)
+        {
             shared_subscriber->update(timestamp, string);
+            ++s_it;
+        }
+        else
+            s_it = _subscribers.erase(s_it);
     }
 }

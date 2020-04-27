@@ -3,11 +3,9 @@
 #include "console_printer.h"
 #include "file_printer.h"
 #include "args_parser.h"
+#include "signals_handler.h"
 
-#include <boost/program_options/options_description.hpp>
-#include <boost/program_options/variables_map.hpp>
-#include <boost/program_options/parsers.hpp>
-
+#include <csignal>
 #include <iostream>
 
 /**
@@ -28,25 +26,31 @@ int main (int argc, char** argv)
     if(!result.has_value())
         return 0;
 
-
-    std::string argument;
     commands_factory cmd_factory;
-    command_type cmd_type;
-    command_handler cmd_handler(result.value());
+    auto cmd_handler = std::make_shared<command_handler>(result.value());
+
+    signals_handler::set_state(cmd_handler);
+    std::signal(SIGINT, signals_handler::handle_sigint);
 
     auto console_out = std::make_shared<console_printer>();
+    cmd_handler->subscribe(console_out);
+
     auto file_out = std::make_shared<file_printer>();
+    cmd_handler->subscribe(file_out);
 
-    cmd_handler.subscribe(console_out);
-    cmd_handler.subscribe(file_out);
+    std::string argument;
+    while(std::getline(std::cin, argument))
+    {
+        try {
+            auto command = cmd_factory.create_command(argument);
+            cmd_handler->add_command(std::move(command));
+        }
+        catch(const std::logic_error& ex) {
+            std::cout << ex.what() << std::endl;
+        }
+    }
 
-    do {
-        std::getline(std::cin, argument);
-        auto command = cmd_factory.create_command(argument);
-        cmd_type = command->type();
-        cmd_handler.add_command(std::move(command));
-
-    } while(cmd_type != command_type::finish);
+    cmd_handler->stop_handling();
 
     return 0;
 }

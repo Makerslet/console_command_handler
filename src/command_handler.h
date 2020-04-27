@@ -33,12 +33,7 @@ public:
      */
     void add_command(std::unique_ptr<base_command>&& command);
 
-    /**
-     * @brief Метод подписки на обновлениия
-     * @param subscriber - подписчик
-     */
-    void subscribe(std::shared_ptr<base_subscriber> subscriber) override;
-
+    void stop_handling();
 private:
     /**
      * @brief Метод обработки оповещения подписчиков
@@ -57,7 +52,6 @@ private:
     /**
      * @brief Метод обработки команды завершения ввода
      */
-    void handle_finish();
     /**
      * @brief Метод обработки текстовой команды
      * @param timestamp - временная метка
@@ -74,7 +68,6 @@ private:
     std::size_t _bulk_length;
     std::size_t _current_scope_level;
 
-    std::vector<std::weak_ptr<base_subscriber>> _subscribers;
     std::vector<commands_description> _commands;
 };
 
